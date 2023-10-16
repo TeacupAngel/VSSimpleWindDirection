@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleWindDirection", "SimpleWindDirection.csproj", "{6954A791-E1C9-42EF-B7D0-F6AFA2E1ED3B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VSCodeDevLauncher", "Launcher\VSCodeDevLauncher.csproj", "{A885ED23-3157-41B2-B5C5-8C49A5EA510E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{6954A791-E1C9-42EF-B7D0-F6AFA2E1ED3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6954A791-E1C9-42EF-B7D0-F6AFA2E1ED3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6954A791-E1C9-42EF-B7D0-F6AFA2E1ED3B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A885ED23-3157-41B2-B5C5-8C49A5EA510E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A885ED23-3157-41B2-B5C5-8C49A5EA510E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A885ED23-3157-41B2-B5C5-8C49A5EA510E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A885ED23-3157-41B2-B5C5-8C49A5EA510E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

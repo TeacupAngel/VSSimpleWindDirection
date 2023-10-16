@@ -2,16 +2,17 @@
     <PropertyGroup>
         <AssemblyTitle>SimpleWindDirection</AssemblyTitle>
         <Authors>TeacupAngel</Authors>
-        <Version>0.1.0</Version>
+        <Version>1.1.0</Version>
         <Description>Simple randomised wind direction based on location and time.</Description>
         <RepositoryUrl>https://github.com/Rahjital/VSSimpleWindDirection</RepositoryUrl>
-        <TargetFramework>net461</TargetFramework>
+        <TargetFramework>net7.0</TargetFramework>
         <LangVersion>latest</LangVersion>
     </PropertyGroup>
     <PropertyGroup>
-        <ModId>modid</ModId>
-        <VSVersion>1.18.0-pre.6</VSVersion>
-        <ModWebsite>https://mods.vintagestory.at/yourmodpage</ModWebsite>
+		<ModName>Simple Wind Direction</ModName>
+        <ModId>simplewinddirection</ModId>
+        <VSVersion>1.18.14</VSVersion>
+        <ModWebsite>https://mods.vintagestory.at/simplewinddirection</ModWebsite>
     </PropertyGroup>
     <ItemGroup>
         <ModInfoAuthors Include='TeacupAngel'/>
@@ -45,7 +46,7 @@
             <HintPath>$(VINTAGE_STORY)/Lib/cairo-sharp.dll</HintPath>
             <Private>false</Private>
         </Reference>
-        <Reference Include="protobuf-net" Version="2.1.0">
+        <Reference Include="protobuf-net">
             <HintPath>$(VINTAGE_STORY)/Lib/protobuf-net.dll</HintPath>
             <Private>false</Private>
         </Reference>
@@ -57,9 +58,19 @@
             <HintPath>$(VINTAGE_STORY)/Lib/Newtonsoft.Json.dll</HintPath>
             <Private>false</Private>
         </Reference>
+		<Reference Include="SkiaSharp">
+            <HintPath>$(VINTAGE_STORY)/Lib/SkiaSharp.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
     </ItemGroup>
-    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-        <DebugType>full</DebugType>
+     <PropertyGroup>
+        <DebugType>portable</DebugType>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+		<GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
+		<AnalysisMode>Minimum</AnalysisMode>
+    </PropertyGroup>
+	<PropertyGroup>
+		<DefaultItemExcludes>$(DefaultItemExcludes);Launcher/**</DefaultItemExcludes>
     </PropertyGroup>
     
     <Target Name="BaseTarget">
@@ -67,7 +78,7 @@
             <ModInfo>
 {
     "type": "code",
-    "name": "$(AssemblyTitle)",
+    "name": "$(ModName)",
     "modid": "$(ModId)",
     "version": "$(Version)",
 

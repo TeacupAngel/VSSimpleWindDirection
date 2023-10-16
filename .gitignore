@@ -6,6 +6,7 @@ resources/*
 # C# compilation files
 /bin
 /obj
+Launcher/obj
 
 # release packaging folders
 /release
