@@ -15,13 +15,15 @@ namespace SimpleWindDirection
 		float frequency = 0.005f;
 		int wrapTimes = 3;
 
-		int timeScale = 25;
+		float timeScaleConstant = 25;
 
 		NormalizedSimplexNoise xNoise;
 		NormalizedSimplexNoise zNoise;
 
 		ICoreServerAPI sapi;
 		ICoreClientAPI capi;
+
+		SimpleWindDirectionConfigSystem configSystem;
 
 		public override void Start(ICoreAPI api)
 		{
@@ -30,6 +32,8 @@ namespace SimpleWindDirection
 
 			if (api is ICoreServerAPI) sapi = api as ICoreServerAPI;
 			if (api is ICoreClientAPI) capi = api as ICoreClientAPI;
+
+			configSystem = api.ModLoader.GetModSystem<SimpleWindDirectionConfigSystem>();
 
 			api.Event.OnGetWindSpeed += (api is ICoreServerAPI) ? ServerEvent_OnGetWindSpeed : ClientEvent_OnGetWindSpeed;
         }
@@ -47,20 +51,20 @@ namespace SimpleWindDirection
 		private void OnGetWindSpeed(ICoreAPI api, Vec3d pos, ref Vec3d windSpeed)
         {
             double windMagnitude = windSpeed.X;
-
-			/*double direction = (testNoise.Noise(pos.X, 0, pos.Z) * wrapTimes) % wrapTimes * GameMath.PI * 2.0;
-
-			windSpeed.X = windMagnitude * GameMath.Sin(direction);
-			windSpeed.Z = windMagnitude * GameMath.Cos(direction);*/
-
-			//windSpeed.X = ((xNoise.Noise(pos.X, api.World.Calendar.TotalHours, pos.Z) * (float)wrapTimes) % 1f) * 2f - 1f;
-			//windSpeed.Z = ((zNoise.Noise(pos.X, api.World.Calendar.TotalHours, pos.Z) * (float)wrapTimes) % 1f) * 2f - 1f;
 			
-			windSpeed.X = Math.Abs((xNoise.Noise(pos.X, api.World.Calendar.TotalHours * timeScale, pos.Z) * wrapTimes) % 2d - 1) * 2d - 1d;
-			windSpeed.Z = Math.Abs((zNoise.Noise(pos.X, api.World.Calendar.TotalHours * timeScale, pos.Z) * wrapTimes) % 2d - 1) * 2d - 1d;
+			float areaScale = configSystem.SWDConfig.WindAreaScale;
+			float timeScale = configSystem.SWDConfig.WindTimeScale;
+
+			windSpeed.X = Math.Abs((xNoise.Noise(pos.X / areaScale, api.World.Calendar.TotalHours * timeScaleConstant / timeScale, pos.Z / areaScale) * wrapTimes) % 2d - 1) * 2d - 1d;
+			windSpeed.Z = Math.Abs((zNoise.Noise(pos.X / areaScale, api.World.Calendar.TotalHours * timeScaleConstant / timeScale, pos.Z / areaScale) * wrapTimes) % 2d - 1) * 2d - 1d;
 			
 			windSpeed.Normalize();
 			windSpeed *= windMagnitude;
         }
+
+		public override void Dispose()
+		{
+			configSystem = null;
+		}
 	}
 }

@@ -24,8 +24,15 @@
         <Dependencies Include='survival'>
             <Version>$(VSVersion)</Version>
         </Dependencies>
+		<Dependencies Include='tealib'>
+            <Version>0.3.1</Version>
+        </Dependencies>
     </ItemGroup>
     <ItemGroup>
+		<Reference Include="TeaLib">
+            <HintPath>$(VINTAGE_STORY_MOD_INCLUDES)/TeaLib/bin/Release/net7.0/TeaLib.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
         <Reference Include="VintagestoryAPI">
             <HintPath>$(VINTAGE_STORY)/VintagestoryAPI.dll</HintPath>
             <Private>false</Private>
